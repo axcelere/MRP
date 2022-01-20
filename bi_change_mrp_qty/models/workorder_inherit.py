@@ -38,7 +38,7 @@ class Mrp_inherit(models.Model):
 
     def button_mark_done(self):
 
-        self.ensure_one()
+        #self.ensure_one()
         for wo in self.workorder_ids:
             
             if wo.state not in ['done','cancel']:
