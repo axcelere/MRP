@@ -23,21 +23,7 @@ class Mrp_inherit(models.Model):
 class Mrp_inherit(models.Model):
     _inherit = "mrp.production"
 
-
-    # prueba
-    # def _get_move_raw_values(self, bom_line, line_data):
-
-    #     res = super(Mrp_inherit, self)._get_move_raw_values(bom_line, line_data)
-
-
-    #     print ("res====================tttttttt=================",bom_line.flexible_consume)
-
-    #     res.update({'flexible_consume' : bom_line.flexible_consume})
-
-    #     return res
-
     def button_mark_done(self):
-        # button_mark_done
         for wo in self.workorder_ids:
             
             if wo.state not in ['done','cancel']:
