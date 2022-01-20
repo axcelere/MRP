@@ -24,7 +24,7 @@ class Mrp_inherit(models.Model):
     _inherit = "mrp.production"
 
 
-
+    # prueba
     # def _get_move_raw_values(self, bom_line, line_data):
 
     #     res = super(Mrp_inherit, self)._get_move_raw_values(bom_line, line_data)
