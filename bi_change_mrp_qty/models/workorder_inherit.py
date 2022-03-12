@@ -57,7 +57,7 @@ class MrpWorkorder_inherit(models.Model):
 
     new_qty_producing = fields.Float(string="New Qty production")
     is_done_workorder = fields.Boolean('Is Done WorkOrder',compute='_compute_is_done_workorder',readonly="False")
-    
+
     
     def _compute_is_done_workorder(self):
         for line in self :
@@ -76,6 +76,12 @@ class MrpWorkorder_inherit(models.Model):
         if self.is_done_workorder == True :
             self.action_custom_done()
             self.production_id.write({'state' : 'to_close'})
+            vals = {'state' : 'to_close'}
+            if self.new_qty_producing != self.qty_producing:
+                vals.update({
+                    'qty_producing': self.new_qty_producing
+                })
+            self.production_id.write(vals)
         return res
 
 
@@ -104,6 +110,27 @@ class MrpWorkorder_inherit(models.Model):
 
                     raw.write({'quantity_done' :new_raw })
 
-        return 
+        return
+
+    @api.onchange('new_qty_producing')
+    def onchange_new_qty_producing(self):
+        self._update_component_quantity()
+
+
+    @api.model
+    def _prepare_component_quantity(self, move, qty_producing):
+        if move.product_id.tracking == 'serial':
+            uom = move.product_id.uom_id
+        else:
+            uom = move.product_uom
+        if move.flexible_consume:
+            _qty_producing = self.new_qty_producing
+        else:
+            _qty_producing = qty_producing
+        return move.product_uom._compute_quantity(
+            _qty_producing * move.unit_factor,
+            uom,
+            round=False
+        )
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
