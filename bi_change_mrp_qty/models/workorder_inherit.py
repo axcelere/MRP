@@ -114,7 +114,8 @@ class MrpWorkorder_inherit(models.Model):
 
     @api.onchange('new_qty_producing')
     def onchange_new_qty_producing(self):
-        self._update_component_quantity()
+        if isinstance(self.id,int):
+            self._update_component_quantity()
 
 
     @api.model
