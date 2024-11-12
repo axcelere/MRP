@@ -3,7 +3,7 @@
 
 {
     "name" : "Flexible Finished Product Quantity in Manufacturing-MRP",
-    "version" : "15.0.0.3",
+    'version': "17.0.1.0.0",
     "category" : "Manufacturing",
     'summary': 'Flexible Finished Product Goods in Manufacturing Flexible Finished Product Goods In mrp change product quantity in production food manufacturing industry Manufacturing several output mrp partial produce manufacturing partial produce food production process',
     "description": """

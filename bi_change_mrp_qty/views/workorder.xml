@@ -10,7 +10,7 @@
                     <field name="qty_producing" invisible="1"/>
                     <field name="is_done_workorder" invisible="1"/>
                     <field name="new_qty_producing" class="oe_inline text-left"
-                        attrs="{'readonly' : [('is_done_workorder','!=',True)]}"
+                        readonly="[('is_done_workorder','!=',True)]"
                         /> <span> &#160;&#160;&#160;&#160;&#160;&#160;|&#160;&#160;&#160;&#160;&#160;&#160;</span>
                 </xpath>
 
